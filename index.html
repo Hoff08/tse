@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposta Comercial</title>
+    <title>Proposta Comercial com Assinatura</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,8 +14,8 @@
             color: #333;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
-
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -23,36 +23,32 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         header {
             text-align: center;
             background-color: #333;
             color: white;
             padding: 10px;
             border-radius: 5px;
+            margin-bottom: 20px;
         }
-
         h3 {
-            color: #444;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 2px solid #ccc;
             padding-bottom: 5px;
+            margin-top: 15px;
         }
-
-        p,
-        ul {
-            line-height: 1.6;
-        }
-
         .signature {
             text-align: center;
             margin-top: 20px;
         }
-
-        #canvas {
+        #signature-pad {
             border: 1px solid #ccc;
             background-color: white;
+            width: 100%;
+            max-width: 350px;
+            height: 150px;
+            touch-action: none;
+            margin: 10px 0;
         }
-
         button {
             background-color: #333;
             color: white;
@@ -62,214 +58,149 @@
             border-radius: 5px;
             margin: 5px;
         }
+        #aceitar-termos {
+            margin-right: 5px;
+        }
+        .section-content {
+            margin-bottom: 15px;
+        }
+        .section-content ul {
+            padding-left: 20px;
+        }
+        .section-content li {
+            margin-bottom: 5px;
+        }
+        .important {
+            font-weight: bold;
+        }
     </style>
 </head>
-
 <body>
     <div class="container">
         <header>
             <h1>Proposta Comercial</h1>
         </header>
-
         <section class="client-info">
             <h3>Informações do Cliente</h3>
-            <p><strong>Nome do Cliente:</strong> Ronaldy</p>
-            <p><strong>Nome do Projeto:</strong> Landing Page</p>
-            <p><strong>Feito por:</strong> Vicenzo Hoffmann</p>
+            <p class="section-content"><strong>Nome do Cliente:</strong> Ronaldy</p>
+            <p class="section-content"><strong>Nome do Projeto:</strong> Landing Page</p>
+            <p class="section-content"><strong>Feito por:</strong> Vicenzo Hoffmann</p>
         </section>
-
         <section class="services">
             <h3>Serviços</h3>
-            <p>Este contrato tem como objetivo a <strong>prestação de serviços para o desenvolvimento/criação de um website institucional</strong>.</p>
-            <p>A instalação e configuração de um website em WordPress pelo CONTRATANTE inclui:</p>
-            <ul>
-                <li><strong>Personalização para garantir que o site se ajuste ao tamanho da tela, tornando-se responsivo.</strong></li>
-                <li><strong>Uso de um tema comercial, totalmente adaptado à identidade visual do CONTRATANTE.</strong></li>
-                <li><strong>Adaptação dos textos para SEO, alinhados com o tema previamente definido.</strong></li>
+            <p class="section-content">Este contrato tem como objetivo a <strong class="important">prestação de serviços para o desenvolvimento/criação de um website institucional</strong>.</p>
+            <p class="section-content">A instalação e configuração de um website em WordPress pelo CONTRATANTE inclui:</p>
+            <ul class="section-content">
+                <li>Personalização para garantir que o site se ajuste ao tamanho da tela, tornando-se responsivo.</li>
+                <li>Uso de um tema comercial, totalmente adaptado à identidade visual do CONTRATANTE.</li>
+                <li>Adaptação dos textos para SEO, alinhados com o tema previamente definido.</li>
                 <li>Seleção de imagens de bancos pagos ou gratuitos, caso o CONTRATANTE não forneça, para uso em postagens e peças publicitárias.</li>
             </ul>
         </section>
-
         <section class="schedule">
             <h3>Cronograma e Vigência</h3>
-            <p>O presente contrato terá <strong>vigência de 1 (um) mês a contar da sua data de assinatura</strong>.</p>
-            <p>A elaboração do website será feita a partir das informações fornecidas pelo CONTRATANTE, via WhatsApp <strong>+55 48 9122-2650</strong></p>
+            <p class="section-content">O presente contrato terá <strong class="important">vigência de 1 (um) mês a contar da sua data de assinatura</strong>.</p>
+            <p class="section-content">A elaboração do website será feita a partir das informações fornecidas pelo CONTRATANTE, via WhatsApp <a href="https://wa.me/554891222650" target="_blank">+55 48 9122-2650</a></p>
         </section>
-
         <section class="payment">
             <h3>Remuneração e Condições de Pagamento</h3>
-            <p>O CONTRATANTE pagará ao CONTRATADO o valor total de <strong>697,00 via depósito, PIX ou transferência bancária</strong>.</p>
-            <p><strong>Ocorrendo atraso no pagamento das parcelas por mais de 30 (trinta) dias, o presente Contrato poderá ser rescindido</strong>, sem prejuízo dos valores devidos bem como poderá o CONTRATANTE ter sua inscrição nos cadastros de restrição ao crédito como SPC/Serasa e outros.</p>
+            <p class="section-content">O CONTRATANTE pagará ao CONTRATADO o valor total de <strong class="important">R$ 697,00 via depósito, PIX ou transferência bancária</strong>.</p>
+            <p class="section-content">Ocorrendo atraso no pagamento das parcelas por mais de 30 (trinta) dias, o presente Contrato poderá ser rescindido, sem prejuízo dos valores devidos bem como poderá o CONTRATANTE ter sua inscrição nos cadastros de restrição ao crédito como SPC/Serasa e outros.</p>
         </section>
-
         <section class="publicity">
             <h3>Publicidade</h3>
-            <p>O CONTRATANTE concorda que o CONTRATADO tem todos os direitos autorais referentes ao material do serviço para publicar em seus canais de divulgação, lista de clientes on-line e materiais promocionais como forma de portfólio apenas;</p>
+            <p class="section-content">O CONTRATANTE concorda que o CONTRATADO tem todos os direitos autorais referentes ao material do serviço para publicar em seus canais de divulgação, lista de clientes on-line e materiais promocionais como forma de portfólio apenas;</p>
         </section>
-
         <section class="obligations">
             <h3>Obrigações</h3>
-            <p>O CONTRATANTE deve estar ciente que o CONTRATADO <strong>SÓ realizará os serviços listados no contrato, e pedidos adicionais serão cobrados</strong>.</p>
-            <p>As obrigações do CONTRATADO incluem:</p>
-            <ol>
-                <li><strong>Executar os serviços com profissionalismo.</strong></li>
-                <li><strong>Enviar solicitações no prazo.</strong></li>
+            <p class="section-content">O CONTRATANTE deve estar ciente que o CONTRATADO <strong class="important">SÓ realizará os serviços listados no contrato, e pedidos adicionais serão cobrados</strong>.</p>
+            <h4 class="section-content">As obrigações do CONTRATADO incluem:</h4>
+            <ul class="section-content">
+                <li>Executar os serviços com profissionalismo.</li>
+                <li>Enviar solicitações no prazo.</li>
                 <li>Estudar o conceito e análise do produto ou serviço.</li>
-            </ol>
-            <p>As obrigações do CONTRATANTE incluem:</p>
-            <ol>
-                <li><strong>Realizar pagamentos pontuais.</strong></li>
-                <li><strong>Não exigir serviços além do que está no contrato.</strong></li>
-                <li><strong>Enviar informações necessárias no prazo.</strong></li>
-                <li><strong>Ser responsável pelo conteúdo sugerido, respondendo legalmente por informações inadequadas.</strong></li>
-            </ol>
+            </ul>
+            <h4 class="section-content">As obrigações do CONTRATANTE incluem:</h4>
+            <ul class="section-content">
+                <li>Realizar pagamentos pontuais.</li>
+                <li>Não exigir serviços além do que está no contrato.</li>
+                <li>Enviar informações necessárias no prazo.</li>
+                <li>Ser responsável pelo conteúdo sugerido, respondendo legalmente por informações inadequadas.</li>
+            </ul>
         </section>
-
         <section class="image-protection">
             <h3>Proteção de Imagem</h3>
-            <p>O CONTRATADO compromete-se a medir todos os esforços no sentido de <strong>preservar a imagem da CONTRATANTE tomando os cuidados necessários</strong></p>
+            <p class="section-content">O CONTRATADO compromete-se a medir todos os esforços no sentido de <strong class="important">preservar a imagem da CONTRATANTE tomando os cuidados necessários</strong></p>
         </section>
-
         <section class="material-preparation">
             <h3>Preparação de Material</h3>
-            <p>O CONTRATADO preparará o material de acordo com o briefing das reuniões via WhatsApp <strong>+55 48 9122-2650</strong> ou E-mail:
-                <a href="mailto:hoffresponde@gmail.com"><strong>hoffresponde@gmail.com</strong></a>
-            </p>
+            <p class="section-content">O CONTRATADO preparará o material de acordo com o briefing das reuniões via WhatsApp <a href="https://wa.me/554891222650" target="_blank">+55 48 9122-2650</a> ou E-mail: <a href="mailto:hoffresponde@gmail.com">hoffresponde@gmail.com</a></p>
         </section>
-
         <section class="modifications">
             <h3>Modificações</h3>
-            <p>Em caso de necessidade de modificações, o CONTRATANTE poderá exigir até <strong>02 (duas) alterações sem custo</strong>, desde que as demandas se mantenham dentro do briefing inicial.</p>
+            <p class="section-content">Em caso de necessidade de modificações, o CONTRATANTE poderá exigir até <strong class="important">02 (duas) alterações sem custo</strong>, desde que as demandas se mantenham dentro do briefing inicial.</p>
         </section>
-
         <section class="rescission">
             <h3>Rescisão</h3>
-            <ol>
-                <li>O CONTRATADO pode ser rescindido automaticamente por descumprimento, mediante <strong>notificação de 30 dias úteis</strong>.</li>
-                <li><strong>Em caso de rescisão, CONTRATADO garante pagamento proporcional pelos serviços prestados até a rescisão, enquanto o CONTRATANTE deve receber todos os materiais resultantes dos serviços até essa data.</strong></li>
-            </ol>
+            <p class="section-content">O CONTRATADO pode ser rescindido automaticamente por descumprimento, mediante <strong class="important">notificação de 30 dias úteis</strong>.</p>
+            <p class="section-content">Em caso de rescisão, CONTRATADO garante pagamento proporcional pelos serviços prestados até a rescisão, enquanto o CONTRATANTE deve receber todos os materiais resultantes dos serviços até essa data.</p>
         </section>
-
         <section class="deliverables">
             <h3>Entregáveis</h3>
-            <p>
-                <b>IDENTIDADE VISUAL</b><br>
-                Inclui <strong>design de logotipo (3 variações) nos formatos PNG, JPG e SVG</strong>.
-            </p>
-            <p>
-                <b>ESTRATÉGIA DE MARCA</b><br>
-                Você receberá um <strong>manual de estratégia de marca em formato PDF</strong>.
-            </p>
-            <p>
-                <b>MENSAGEM DA MARCA</b><br>
-                A Mensagem da Marca estará incluída na Estratégia de Marca.
-            </p>
-            <p>
-                <b>SUPORTE</b><br>
-                Nós oferecemos <strong>1 mês de suporte após a entrega do projeto</strong>.
-            </p>
+            <h4 class="section-content">IDENTIDADE VISUAL</h4>
+            <p class="section-content">Inclui <strong class="important">design de logotipo (3 variações)</strong> nos formatos PNG, JPG e SVG.</p>
+            <h4 class="section-content">ESTRATÉGIA DE MARCA</h4>
+            <p class="section-content">Você receberá um <strong class="important">manual de estratégia de marca em formato PDF</strong>.</p>
+            <h4 class="section-content">MENSAGEM DA MARCA</h4>
+            <p class="section-content">A Mensagem da Marca estará incluída na Estratégia de Marca.</p>
+            <h4 class="section-content">SUPORTE</h4>
+            <p class="section-content">Nós oferecemos <strong class="important">1 mês de suporte após a entrega do projeto</strong>.</p>
         </section>
-
-        <section class="payment-terms">
+        <section class="payment-conditions">
             <h3>Condições de Pagamento</h3>
-            <p><strong>Os pagamentos pelos projetos devem ser feitos antes do início do projeto.</strong></p>
-            <p><strong>Nós forneceremos os detalhes de pagamento assim que iniciarmos o projeto.</strong></p>
-            <p><strong>Nós também oferecemos planos de pagamento para cada etapa separadamente</strong>, o que significa que seu investimento inicial será menor. Entre em contato para mais detalhes!</p>
-            <p>
-                <b>Investimento Total:</b><br>
-                <strong>697,00</strong>
-            </p>
+            <p class="section-content">Os pagamentos pelos projetos devem ser feitos antes do início do projeto.</p>
+            <p class="section-content">Nós forneceremos os detalhes de pagamento assim que iniciarmos o projeto.</p>
+            <p class="section-content">Nós também oferecemos planos de pagamento para cada etapa separadamente, o que significa que seu investimento inicial será menor. Entre em contato para mais detalhes!</p>
         </section>
-
+        <section class="total-investment">
+            <h3>Investimento Total:</h3>
+            <p class="section-content"><strong class="important">R$ 697,00</strong></p>
+        </section>
         <section class="signature">
             <h3>Assinatura</h3>
             <input type="checkbox" id="aceitar-termos"> Eu li e aceito os termos da proposta.<br>
-            <button id="assinar">Assinar</button>
+            <canvas id="signature-pad"></canvas>
+            <br>
+            <button id="clear">Limpar</button>
             <button id="download">Baixar Assinatura</button>
-            <div id="canvasDiv"></div>
-            <p>Ao assinar, baixe a foto e envie no WhatsApp para o número abaixo:</p>
             <a id="whatsapp-link" href="#" target="_blank">
                 <button>Enviar para WhatsApp</button>
             </a>
         </section>
     </div>
     <script>
-        $(document).ready(function() {
-            var canvasWidth = 300;
-            var canvasHeight = 150;
-            var canvasDiv = document.getElementById('canvasDiv');
+        document.addEventListener("DOMContentLoaded", function () {
+            var canvas = document.getElementById("signature-pad");
+            var signaturePad = new SignaturePad(canvas, {
+                backgroundColor: 'white',
+                penColor: 'black'
+            });
 
-            var canvas = document.createElement('canvas');
-            canvas.setAttribute('width', canvasWidth);
-            canvas.setAttribute('height', canvasHeight);
-            canvas.setAttribute('id', 'canvas');
-            canvasDiv.appendChild(canvas);
+            // Botão de limpar assinatura
+            document.getElementById("clear").addEventListener("click", function () {
+                signaturePad.clear();
+            });
 
-            if (typeof G_vmlCanvasManager != 'undefined') {
-                canvas = G_vmlCanvasManager.initElement(canvas);
-            }
-            var context = canvas.getContext("2d");
-
-            var clickX = [];
-            var clickY = [];
-            var clickDrag = [];
-            var paint = false;
-
-            function addClick(x, y, dragging) {
-                clickX.push(x);
-                clickY.push(y);
-                clickDrag.push(dragging);
-            }
-
-            function redraw() {
-                context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-                context.strokeStyle = "#000"; // Cor preta para a assinatura
-                context.lineJoin = "round";
-                context.lineWidth = 2; // Espessura da linha da assinatura
-
-                for (var i = 0; i < clickX.length; i++) {
-                    context.beginPath();
-                    if (clickDrag[i] && i) {
-                        context.moveTo(clickX[i - 1], clickY[i - 1]);
-                    } else {
-                        context.moveTo(clickX[i] - 1, clickY[i]);
-                    }
-                    context.lineTo(clickX[i], clickY[i]);
-                    context.closePath();
-                    context.stroke();
+            // Botão para baixar a assinatura
+            document.getElementById("download").addEventListener("click", function () {
+                if (signaturePad.isEmpty()) {
+                    alert("Por favor, assine antes de baixar.");
+                    return;
                 }
-            }
-
-            $('#canvas').mousedown(function(e) {
-                var mouseX = e.pageX - this.offsetLeft;
-                var mouseY = e.pageY - this.offsetTop;
-                paint = true;
-                addClick(mouseX, mouseY);
-                redraw();
-            });
-
-            $('#canvas').mousemove(function(e) {
-                if (paint) {
-                    var mouseX = e.pageX - this.offsetLeft;
-                    var mouseY = e.pageY - this.offsetTop;
-                    addClick(mouseX, mouseY, true);
-                    redraw();
-                }
-            });
-
-            $('#canvas').mouseup(function(e) {
-                paint = false;
-            });
-
-            $('#canvas').mouseleave(function(e) {
-                paint = false;
-            });
-
-            $('#download').click(function() {
-                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                var link = document.createElement('a');
+                var image = signaturePad.toDataURL("image/png");
+                var link = document.createElement("a");
                 link.href = image;
-                link.download = 'assinatura.png';
+                link.download = "assinatura.png";
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -283,5 +214,4 @@
         });
     </script>
 </body>
-
 </html>
