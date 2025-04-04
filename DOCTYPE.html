@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrato de Prestação de Serviços</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        h3 {
+            color: #444;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+        p, ul {
+            line-height: 1.6;
+        }
+        .signature {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #canvas {
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Contrato de Prestação de Serviços</h1>
+        </header>
+        <section class="contract">
+            <h3>Nome do Cliente</h3>
+            <p><strong>Nome:</strong> Ronaldy</p>
+            <p><strong>Feito por:</strong> Vicenzo Hoffmann</p>
+            <p><strong>Nome do Projeto:</strong> Landing Page</p>
+            
+            <h3>Serviços Contratados</h3>
+            <p>Este contrato tem como objetivo a prestação de serviços para o desenvolvimento/criação de um website institucional.</p>
+            <ul>
+                <li>Personalização responsiva do site.</li>
+                <li>Uso de um tema comercial adaptado à identidade visual do contratante.</li>
+                <li>Adaptação dos textos para SEO.</li>
+                <li>Seleção de imagens de bancos pagos ou gratuitos.</li>
+            </ul>
+        </section>
+        <section class="signature">
+            <input type="checkbox" id="aceitar-termos"> Eu li e aceito os termos do contrato.<br>
+            <button id="assinar">Assinar</button>
+            <button id="download">Baixar Assinatura</button>
+            <div id="canvasDiv"></div>
+            <p>Ao assinar, baixe a foto e envie no WhatsApp para o número abaixo:</p>
+            <a id="whatsapp-link" href="#" target="_blank">
+                <button>Enviar para WhatsApp</button>
+            </a>
+        </section>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var canvasWidth = 300;
+            var canvasHeight = 150;
+            var canvasDiv = document.getElementById('canvasDiv');
+            
+            var canvas = document.createElement('canvas');
+            canvas.setAttribute('width', canvasWidth);
+            canvas.setAttribute('height', canvasHeight);
+            canvas.setAttribute('id', 'canvas');
+            canvasDiv.appendChild(canvas);
+            
+            if (typeof G_vmlCanvasManager != 'undefined') {
+                canvas = G_vmlCanvasManager.initElement(canvas);
+            }
+            var context = canvas.getContext("2d");
+            
+            var clickX = [];
+            var clickY = [];
+            var clickDrag = [];
+            var paint = false;
+            
+            function addClick(x, y, dragging) {
+                clickX.push(x);
+                clickY.push(y);
+                clickDrag.push(dragging);
+            }
+            
+            function redraw() {
+                context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+                context.strokeStyle = "#df4b26";
+                context.lineJoin = "round";
+                context.lineWidth = 5;
+                
+                for (var i = 0; i < clickX.length; i++) {
+                    context.beginPath();
+                    if (clickDrag[i] && i) {
+                        context.moveTo(clickX[i - 1], clickY[i - 1]);
+                    } else {
+                        context.moveTo(clickX[i] - 1, clickY[i]);
+                    }
+                    context.lineTo(clickX[i], clickY[i]);
+                    context.closePath();
+                    context.stroke();
+                }
+            }
+            
+            $('#canvas').mousedown(function(e) {
+                var mouseX = e.pageX - this.offsetLeft;
+                var mouseY = e.pageY - this.offsetTop;
+                paint = true;
+                addClick(mouseX, mouseY);
+                redraw();
+            });
+            
+            $('#canvas').mousemove(function(e) {
+                if (paint) {
+                    var mouseX = e.pageX - this.offsetLeft;
+                    var mouseY = e.pageY - this.offsetTop;
+                    addClick(mouseX, mouseY, true);
+                    redraw();
+                }
+            });
+            
+            $('#canvas').mouseup(function(e) {
+                paint = false;
+            });
+            
+            $('#canvas').mouseleave(function(e) {
+                paint = false;
+            });
+            
+            $('#download').click(function() {
+                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                var link = document.createElement('a');
+                link.href = image;
+                link.download = 'assinatura.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+            
+            // Configurar botão de envio para WhatsApp
+            var whatsappNumber = "554891222650";
+            var message = encodeURIComponent("Olá, segue a assinatura do contrato.");
+            var whatsappLink = "https://wa.me/" + whatsappNumber + "?text=" + message;
+            document.getElementById("whatsapp-link").href = whatsappLink;
+        });
+    </script>
+</body>
+</html>
